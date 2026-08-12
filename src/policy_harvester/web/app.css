@@ -206,4 +206,3 @@ footer { display: flex; justify-content: space-between; gap: 24px; width: min(14
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
-

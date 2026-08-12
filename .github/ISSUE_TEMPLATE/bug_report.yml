@@ -47,4 +47,3 @@ body:
         - label: I removed credentials, personal paths, and downloaded content.
           required: true
 
-

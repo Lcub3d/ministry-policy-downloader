@@ -9,4 +9,3 @@
 - [ ] No downloaded content, workbook, log, backup, credential, or local absolute path is included.
 - [ ] User-facing behavior or limitations are reflected in the README.
 
-

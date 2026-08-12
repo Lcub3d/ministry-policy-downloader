@@ -23,4 +23,3 @@ ADAPTER = SiteAdapter(
         Section("zctj", "政策图解", ("/xxgk/jd/zctj/index.html",), url_prefixes=("/xxgk/jd/zctj/",)),
     ),
 )
-

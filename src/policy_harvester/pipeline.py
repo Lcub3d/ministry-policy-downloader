@@ -225,4 +225,3 @@ class Pipeline:
             if url in seen:
                 raise ValueError(f"duplicate policy URL in index: {policy.url}")
             seen.add(url)
-

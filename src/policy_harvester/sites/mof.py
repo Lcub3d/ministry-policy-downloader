@@ -92,4 +92,3 @@ ADAPTER = MofAdapter(
         Section("czsj", "财政数据", ("/gkml/caizhengshuju/index.htm",)),
     ),
 )
-

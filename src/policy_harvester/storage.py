@@ -565,4 +565,3 @@ class Storage:
             if not (self.output_dir / str(row["path"])).is_file()
         )
         return result
-

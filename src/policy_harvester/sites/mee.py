@@ -34,4 +34,3 @@ ADAPTER = SiteAdapter(
         Section("gb_ydy", "中国移动源环境管理年报", ("/hjzl/sthjzk/ydyhjgl/index.shtml",)),
     ),
 )
-

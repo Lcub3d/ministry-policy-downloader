@@ -43,4 +43,3 @@ jobs:
       - run: policy-harvester preview --help
       - run: policy-harvester audit --help
       - run: policy-harvester serve --help
-

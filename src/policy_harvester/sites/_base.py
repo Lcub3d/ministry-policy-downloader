@@ -363,4 +363,3 @@ def _compact_markdown(value: str) -> str:
             lines.append("")
             blank = True
     return "\n".join(lines).strip()
-

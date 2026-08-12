@@ -198,4 +198,3 @@ document.querySelector("#copy-log").addEventListener("click", async (event) => {
     showError("浏览器未允许复制，请在日志中全选复制。 ");
   }
 });
-

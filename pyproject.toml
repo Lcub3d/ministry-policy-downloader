@@ -45,4 +45,3 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 policy_harvester = ["web/*.html", "web/*.css", "web/*.js"]
-

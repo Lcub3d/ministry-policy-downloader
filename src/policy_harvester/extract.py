@@ -72,4 +72,3 @@ def extract_document(url: str, html: str) -> DocumentContent:
 
     text = markdownify(str(container), heading_style="ATX").strip()
     return DocumentContent(title=title, markdown=text + ("\n" if text else ""), attachments=tuple(attachments))
-

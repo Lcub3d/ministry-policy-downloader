@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 4.3 seconds
-Output:
 # Ministry Policy Downloader / 部委政策下载器
 
 一个面向中国政府公开政策资料的本地归档工具：按日期增量采集索引，保存正文与附件，并生成可审计清单。
@@ -135,4 +132,3 @@ python -m build
 ## 许可与内容权利
 
 项目源代码按 [MIT License](LICENSE) 许可。由工具访问或下载的政府网页、附件、徽标和其他第三方内容不因此获得 MIT 许可，其权利归原始权利人所有。详见 [NOTICE](NOTICE)。
-

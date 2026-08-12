@@ -25,4 +25,3 @@ class DocumentContent:
     title: str
     markdown: str
     attachments: tuple[Attachment, ...] = ()
-

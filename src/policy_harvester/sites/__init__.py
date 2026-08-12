@@ -15,4 +15,3 @@ def get_adapter(name: str):
 
 
 __all__ = ["ADAPTERS", "get_adapter"]
-

@@ -17,4 +17,3 @@ coverage is not a guarantee of complete official-site or historical coverage.
 Third-party Python packages retain their own licenses. See pyproject.toml for
 the dependency list and the installed packages for their license texts.
 
-

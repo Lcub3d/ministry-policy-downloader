@@ -21,4 +21,3 @@ For ordinary concerns, open an issue without including private details. For a
 sensitive report, ask a maintainer there to arrange a private channel. Reports
 will be reviewed promptly and handled as confidentially as practical.
 
-

@@ -25,4 +25,3 @@ tokens, proxy credentials, private URLs, or local archives in a report.
 The optional web interface is intended for localhost use only. It has no
 authentication and can start download jobs; do not expose it to an untrusted
 network or the public internet.
-

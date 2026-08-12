@@ -37,4 +37,3 @@ use `source .venv/bin/activate`.
 By contributing, you agree that your contribution is licensed under the
 repository's MIT License.
 
-

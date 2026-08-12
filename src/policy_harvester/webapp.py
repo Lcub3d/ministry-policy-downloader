@@ -390,4 +390,3 @@ def serve(host: str = "127.0.0.1", port: int = 8765, *, open_browser: bool = Tru
     finally:
         server.server_close()
     return 0
-
