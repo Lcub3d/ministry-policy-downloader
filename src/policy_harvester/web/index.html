@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#102419">
+  <title>部委政策下载器</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<!--
+THESIS: 把分散在四个官网的政策，变成一份可核验的本地档案；拒绝指标卡堆砌的通用后台。
+OWN-WORLD: 温和纸张底色、深森林绿、连续登记清单和深色机器日志组成现代档案工作台。
+STORY: 用户选来源与日期，确认输出范围，启动增量归档，并看见每个来源的成功、跳过和缺口。
+FIRST VIEWPORT: 顶部说明产品，左侧固定配置与主操作，右侧是连续运行账册；主按钮始终无需滚动。
+FORM: Operate 模式的非对称双栏工作台，沿用既有桌面工具的任务顺序并适配浏览器。
+-->
+<body>
+  <a class="skip-link" href="#workspace">跳到操作区</a>
+  <header class="masthead">
+    <div class="brand-lockup" aria-label="部委政策下载器">
+      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M9 8h24l6 6v26H9z" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M33 8v7h7M15 20h18M15 27h18M15 34h11" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      </svg>
+      <div>
+        <strong>部委政策下载器</strong>
+        <span>Ministry Policy Downloader</span>
+      </div>
+    </div>
+    <div class="masthead-meta">
+      <span class="privacy-dot" aria-hidden="true"></span>
+      数据仅写入本机
+      <a href="https://github.com/Lcub3d/ministry-policy-downloader" target="_blank" rel="noreferrer">开源项目</a>
+    </div>
+  </header>
+
+  <main id="workspace" class="workspace">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="kicker">本地增量归档</p>
+      <h1 id="page-title">把四个官网，整理成一份可核验档案。</h1>
+      <p>按日期扫描官方栏目，保存网页正文、Markdown 与原始附件。每次运行都留下清单，跳过和失败同样看得见。</p>
+    </section>
+
+    <div class="desk">
+      <form id="job-form" class="setup" novalidate>
+        <div class="section-heading">
+          <span class="step-index">1</span>
+          <div>
+            <h2>选择来源</h2>
+            <p>至少选择一个部委。四个来源按顺序运行，避免同时写入。</p>
+          </div>
+        </div>
+
+        <fieldset id="sources" class="source-ledger">
+          <legend class="sr-only">政策来源</legend>
+          <label class="source-row">
+            <input type="checkbox" name="source" value="ndrc" checked>
+            <span class="source-code">NDRC</span>
+            <span class="source-name"><strong>国家发展改革委</strong><small>ndrc.gov.cn</small></span>
+            <span class="source-state">已启用</span>
+          </label>
+          <label class="source-row">
+            <input type="checkbox" name="source" value="mee" checked>
+            <span class="source-code">MEE</span>
+            <span class="source-name"><strong>生态环境部</strong><small>mee.gov.cn</small></span>
+            <span class="source-state">已启用</span>
+          </label>
+          <label class="source-row">
+            <input type="checkbox" name="source" value="mnr" checked>
+            <span class="source-code">MNR</span>
+            <span class="source-name"><strong>自然资源部</strong><small>mnr.gov.cn</small></span>
+            <span class="source-state">已启用</span>
+          </label>
+          <label class="source-row">
+            <input type="checkbox" name="source" value="mof" checked>
+            <span class="source-code">MOF</span>
+            <span class="source-name"><strong>财政部</strong><small>mof.gov.cn</small></span>
+            <span class="source-state">已启用</span>
+          </label>
+        </fieldset>
+
+        <div class="section-heading compact">
+          <span class="step-index">2</span>
+          <div>
+            <h2>设定范围</h2>
+            <p>首次建议从较近日期试跑，确认结果后再扩大范围。</p>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>起始日期</span>
+            <input id="since" name="since" type="date" required>
+          </label>
+          <label class="field wide">
+            <span>输出目录</span>
+            <input id="output" name="output" type="text" value="./data" required spellcheck="false" autocomplete="off">
+            <small>相对路径从启动程序的目录计算，也可以填写绝对路径。</small>
+          </label>
+        </div>
+
+        <details class="advanced">
+          <summary>网络设置</summary>
+          <div class="advanced-body">
+            <label class="field delay-field">
+              <span>请求间隔（秒）</span>
+              <input type="number" name="delay" value="1" min="0.2" max="30" step="0.2">
+            </label>
+          </div>
+        </details>
+
+        <div id="form-error" class="form-error" role="alert" hidden></div>
+        <div class="actions">
+          <button id="start-button" class="button primary" type="submit">
+            <span class="button-label">开始增量下载</span>
+            <span class="button-busy" aria-hidden="true">正在运行…</span>
+          </button>
+          <button id="scan-button" class="button secondary" type="button">仅扫描索引</button>
+          <button id="stop-button" class="button danger" type="button" disabled>停止任务</button>
+        </div>
+        <p class="boundary-note">“运行完成”仅表示已配置栏目处理完毕，不代表官网历史内容绝对完整。</p>
+      </form>
+
+      <section class="run-panel" aria-labelledby="run-title">
+        <div class="run-head">
+          <div>
+            <p class="kicker">运行账册</p>
+            <h2 id="run-title">本次任务</h2>
+          </div>
+          <span id="overall-status" class="status idle"><span aria-hidden="true"></span>等待开始</span>
+        </div>
+
+        <div id="empty-state" class="empty-state">
+          <svg viewBox="0 0 120 92" aria-hidden="true">
+            <path d="M17 23h31l8 8h47v48H17z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M28 45h48M28 55h63M28 65h38" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="91" cy="29" r="13" fill="#F2F0E8" stroke="currentColor" stroke-width="2"/>
+            <path d="m85 29 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3>准备建立第一份档案</h3>
+          <p>选择左侧范围并开始。运行后，这里会逐项显示发现、保存、跳过和失败的数量。</p>
+        </div>
+
+        <div id="run-content" hidden>
+          <div class="job-facts" aria-label="任务信息">
+            <div><span>任务</span><strong id="job-id">—</strong></div>
+            <div><span>范围</span><strong id="job-range">—</strong></div>
+            <div><span>输出</span><strong id="job-output">—</strong></div>
+          </div>
+
+          <div class="progress-track" aria-label="任务进度">
+            <div id="progress-bar" class="progress-bar" style="width:0%"></div>
+          </div>
+          <p id="progress-copy" class="progress-copy" aria-live="polite">正在准备…</p>
+
+          <div class="result-header" aria-hidden="true">
+            <span>来源</span><span>发现</span><span>保存</span><span>跳过</span><span>失败</span><span>状态</span>
+          </div>
+          <div id="result-rows" class="result-rows"></div>
+
+          <div class="terminal-head">
+            <h3>实时记录</h3>
+            <button id="copy-log" class="text-button" type="button">复制日志</button>
+          </div>
+          <pre id="log" class="terminal" tabindex="0" aria-label="实时运行日志"><code>等待任务输出…</code></pre>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <span>非官方社区工具 · 请遵守各网站使用规则</span>
+    <span>HTML · Markdown · 原始附件 · CSV / JSON 清单</span>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
+
