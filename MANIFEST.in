@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include NOTICE
+include SECURITY.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+include LAUNCH_PLAN.md
+include PRODUCT.md
+include DESIGN.md
+recursive-include docs/images *.png
+recursive-include src/policy_harvester/web *.html *.css *.js
+
