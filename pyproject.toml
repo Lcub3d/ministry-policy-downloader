@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ministry-policy-downloader"
+version = "0.1.0"
+description = "Incrementally archive public policy documents from Chinese ministry websites"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Ministry Policy Downloader contributors" }]
+keywords = ["policy", "archive", "government", "china", "open-data"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+]
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "markdownify>=0.11",
+]
+
+[project.urls]
+Homepage = "https://github.com/Lcub3d/ministry-policy-downloader"
+Repository = "https://github.com/Lcub3d/ministry-policy-downloader"
+Issues = "https://github.com/Lcub3d/ministry-policy-downloader/issues"
+
+[project.scripts]
+policy-harvester = "policy_harvester.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+policy_harvester = ["web/*.html", "web/*.css", "web/*.js"]
+
