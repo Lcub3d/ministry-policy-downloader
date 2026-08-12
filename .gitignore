@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.coverage
+.env
+.env.*
+htmlcov/
+build/
+dist/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Runtime output and local archives
+data/
+downloads/
+exports/
+logs/
+*.log
+.ui-smoke.*
+*.xls
+*.xlsx
+*.lock
+*.part
+*.tmp
+*.bak
+*.backup*
+desktop.png
+mobile.png
+*.last-good.*
+**/原始数据/
+**/HTML存档/
+**/PDF存档/
+**/MD存档/
+**/附件下载/
+**/att_progress.json
+**/status.json
+
